@@ -4,16 +4,16 @@ import numpy as np
 from YOLO_detector import Detector
 def auto_lane(img,lane=None,center_point=None,threshold=200):
     # center_point=sorted(center_point)
-    count=1
-    check_ss={}
-    print(len(center_point))
+  
+    # print(len(center_point))
     final=True
     check_ss=[]
     while final :
         check=center_point[0]
         ss=0
-        
+        count=1
         check_1=[]
+        check_1.append(check)
         for point in center_point :
             
             if abs(check[0]-point[0])<threshold and check[1]<point[1]:
@@ -24,21 +24,19 @@ def auto_lane(img,lane=None,center_point=None,threshold=200):
                 print("Point swap :",check)
                 print('Found {} point '.format(count))
                 check_1.append(point)
-       
-                    
-                # cv2.circle(img,tuple(check),10,(0,0,255),-1)
-            else :
-                # print("sssss")
-                pass
-                # cv2.circle(img,tuple(point),10,(255,0,125),-1)
+        print("check 1 :",check_1)
         check_ss.append(check_1)
+        print("check_ss",check_1)
         check_1.clear()
-        center_point=[x for x in center_point if x not in check_ss]
+        # l2s=set(check_ss)
+        center_point=set(tuple(center_point))-set(tuple(check_ss))
+        center_point=list(center_point)
+        
         print(len(center_point))
         if len(center_point)<1:
             final=False
         ss+=1
-        print(check_ss)
+    print(check_ss)
         
     
     
