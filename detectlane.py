@@ -8,10 +8,11 @@ def auto_lane(img,lane=None,center_point=None,threshold=200):
     check_ss={}
     print(len(center_point))
     final=True
+    check_ss=[]
     while final :
         check=center_point[0]
         ss=0
-        check_ss=[]
+        
         check_1=[]
         for point in center_point :
             
