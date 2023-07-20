@@ -2,7 +2,6 @@ import torch
 import cv2
 import numpy as np 
 from YOLO_detector import Detector
-<<<<<<< HEAD
 from loguru import logger
 p1,p2,p3,p4=None,None,None,None
 state=0
@@ -37,18 +36,12 @@ def on_mouse(event, x, y, flags, userdata):
     if event == cv2.EVENT_LBUTTONDBLCLK:
         p1, p2,p3,p4 = None, None,None,None
         state = 0
-=======
->>>>>>> 908f15651a15ac449520ab15f3103e383376a6dd
 def auto_lane(img,lane=None,center_point=None,roi=None,threshold=200):
     final=True
     check_ss={}
     ss=0
     while final :
         check=center_point[0]
-<<<<<<< HEAD
-=======
-       
->>>>>>> 908f15651a15ac449520ab15f3103e383376a6dd
         count=1
         check_1=[]
         check_1.append(check)
@@ -63,24 +56,15 @@ def auto_lane(img,lane=None,center_point=None,roi=None,threshold=200):
                 # print('Found {} point '.format(count))
                 check_1.append(point)
                
-<<<<<<< HEAD
         # print("check 1 :",check_1)
         copy_list=check_1.copy()
         check_ss[str(ss)]=copy_list
         # print("check_ss",check_ss)
         # print("check_ss",check_1)
-=======
-        print("check 1 :",check_1)
-        copy_list=check_1.copy()
-        check_ss[str(ss)]=copy_list
-        print("check_ss",check_ss)
-        print("check_ss",check_1)
->>>>>>> 908f15651a15ac449520ab15f3103e383376a6dd
         for p in check_1:
             center_point.remove(p)
         check_1.clear()
         center_point=list(center_point)
-<<<<<<< HEAD
         # print('center point :' ,center_point)
         # print(len(center_point))
         ss+=1
@@ -116,31 +100,10 @@ def auto_lane(img,lane=None,center_point=None,roi=None,threshold=200):
     if len(check_ss)==lane :
         print("okkk")
     return check_ss,list_lane
-=======
-        print('center point :' ,center_point)
-        print(len(center_point))
-        ss+=1
-        if len(center_point)<1:
-            final=False
-    if len(check_ss)<lane :
-        print("không khớp  với đàu vào ")
-        x1,y1,x2,y2=roi
-        y_center=int((y2+y1)/2)
-        
-    if len(check_ss)==lane :
-        print("okkk")
-    
-
-       
-    return check_ss
->>>>>>> 908f15651a15ac449520ab15f3103e383376a6dd
         
     
     
-        
-        
-        
-    
+          
 if __name__=="__main__":
     img=cv2.imread("test2.jpg")
     img=cv2.resize(img,(1280,720))
@@ -150,7 +113,6 @@ if __name__=="__main__":
     while True :
         if p1 is not None and p2 is not None and p3 is not None and p4 is not None :
             
-<<<<<<< HEAD
             pts=np.array([p1,p2,p3,p4],np.int32)
             list_pts=[p1,p2,p3,p4]
             print(pts)
@@ -187,17 +149,3 @@ if __name__=="__main__":
         cv2.imshow("frame",img)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
-=======
-            img=cv2.rectangle(img,(box[0],box[1]),(box[2],box[3]),(255,0,0),1)
-    center_point=sorted(center_point)
-    check_ss=auto_lane(img,center_point=center_point,lane=2)
-    print("results :",check_ss)
-    isClosed=False
-    color=(0,0,255)
-    # print(center_point)
-    thickness=2
-    # img=cv2.polylines(img,[np.array(center_point,np.int32)],isClosed,color,thickness)
-    # cv2.imshow("result",img)
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindows()
->>>>>>> 908f15651a15ac449520ab15f3103e383376a6dd
